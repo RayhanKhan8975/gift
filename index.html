@@ -3,19 +3,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gift</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('Barvs2gzOxs90cTo4');
+        })();
+    </script>
+        <script src=
+        "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+            </script>
+             
+              <script>
+             
+            /* Add "https://api.ipify.org?format=json" statement
+                       this will communicate with the ipify servers in
+                       order to retrieve the IP address $.getJSON will
+                       load JSON-encoded data from the server using a
+                       GET HTTP request */
+
+            </script>
+
 </head>
 
 
 <body>
 
+    <button onclick="speak()" >Click ME</button>
     <script>
-        var msg = new SpeechSynthesisUtterance('Azdin accha baccha hai');
+
+window.onload = function (){
+
+                            
+    $.getJSON("https://api.ipify.org?format=json", function(data) {
+                 
+                 // Setting text of element P with id gfg
+             //    $("#gfg").html(data.ip);
+
+                 const date = new Date();
+
+var ISToffSet = 330; //IST is 5:30; i.e. 60*5+30 = 330 in minutes 
+offset= ISToffSet*60*1000;
+var ISTTime = new Date(date.getTime()+offset);
+
+var templateParams = {
+    from_name: 'Rayhan',
+    to_name : 'Rayhan',
+    day:date.getDay(),
+    ip:data.ip,
+    time : ISTTime };
+
+    emailjs.send('service_2eis66n', 'template_cpph2j4', templateParams)
+.then(function(response) {
+   console.log('SUCCESS!', response.status, response.text);
+}, function(error) {
+   console.log('FAILED...', error);
+});
+
+
+             })
+
+
+};
+ 
+ function speak()
+{
+    var msg = new SpeechSynthesisUtterance('Maryam Thodi Pagal Hai');
 msg.lang = 'hi-IN';
 
-for(var i = 0; i < 10; i++)
+for(var i = 0; i < 8; i++)
     {
 window.speechSynthesis.speak(msg);
     }
+}
+
+
 </script>
 
 </body>
